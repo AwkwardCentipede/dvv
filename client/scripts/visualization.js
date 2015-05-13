@@ -59,14 +59,14 @@ var onDataAnim = function(){
 
   // animate one to explode!
   svg.select(".node")
-      .transition()
-      .duration(500)
-      .ease("elastic")
-      .delay(500)
-      .attr("r", 1000)
-      .transition()
-      .duration(0)
-      .attr("r", 5)
+    .transition()
+    .duration(500)
+    .ease("elastic")
+    .delay(500)
+    .attr("r", 1000)
+    .transition()
+    .duration(0)
+    .attr("r", 5)
 }
 
 // Change force layout properties for "agitated" state animation
