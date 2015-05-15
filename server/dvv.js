@@ -34,8 +34,12 @@ var DATA = [1, 2, 3];
 var PARTITION_LENGTH = 1;
 
 //Callback to be made on complete of entire distributed task
-// var CALLBACK = function(results){ console.log(results); return results; };
-var CALLBACK = function(results){ console.log('results'); return results; };
+var CALLBACK = function(results){ 
+  // console.log('results'); 
+  return results; 
+};
+
+
 //Set a timer to measure the duration of entire distributed task
 //For testing purposes
 var CLOCK = false;
@@ -160,9 +164,6 @@ dvv.start = function(){
     }
  
     //This kicks off timer for internal testing purposes
-    if(clock){
-      console.time('timer');
-    }
 
     console.log('New Connection:',socket);
     availableClients.push(socket);
@@ -223,9 +224,9 @@ dvv.start = function(){
         }
 
         // console.log('testRuns.clientTimes:',testRuns.clientTimes);
-        console.log('testRuns.errors',testRuns.errors);
-        console.log('testRuns.errorTimes',testRuns.errorTimes);
-        console.log('testRuns.workerTimes',testRuns.workerTimes);
+        // console.log('testRuns.errors',testRuns.errors);
+        // console.log('testRuns.errorTimes',testRuns.errorTimes);
+        // console.log('testRuns.workerTimes',testRuns.workerTimes);
 
         io.emit('complete',  { 
           'results': results,

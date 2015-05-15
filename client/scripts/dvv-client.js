@@ -18,7 +18,7 @@ var ON_END_PROGRESS = function(){
   console.log("Computation Complete, assembling results...");
 }
 var ON_RESULTS = function(results){
-  console.log(results);
+  console.log("RESULTS: ", results);
 }
 
 var dvvClientConfig = function(params){
@@ -66,7 +66,7 @@ var dvvClientStart = function(){
 
   //Upon receiving data, process it
   socket.on('data', function(data) {
-    console.log('data:', data);
+    // console.log('data:', data);
 
     ON_DATA(data);
 
