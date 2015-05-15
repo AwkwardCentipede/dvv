@@ -60,16 +60,20 @@ dvv.config = function(params){
   }
   if('func' in params){
     FUNC = '(' + params.func + ').apply(this, element)';
+    console.log('FUNC: ', FUNC);
     FUNC_NAME = params.func;
   }
   if('data' in params){
     DATA = params.data;
+    console.log('DATA: ', DATA);
   }
   if('partitionLength' in params){
     PARTITION_LENGTH = params.partitionLength;
+    console.log('PARTITION_LENGTH: ', PARTITION_LENGTH);
   }
   if('callback' in params){
     CALLBACK = params.callback;
+    console.log('CALLBACK: ', CALLBACK);
   }
   if('clock' in params){
     CLOCK = params.clock;
