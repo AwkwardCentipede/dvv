@@ -6,10 +6,10 @@ monteCarloPi = require('./montecarlopi.js')(15);
 dvv.config({
   staticPath: '/../client',
   timeout: 30000,
-  data: nqueens.data,
+  data: monteCarloPi.data,
   partitionLength: 0,
   func: monteCarloPi.func,
-  callback: nqueens.callback,
+  callback: monteCarloPi.callback,
   clock: true
 });
 

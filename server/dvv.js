@@ -39,7 +39,6 @@ var CALLBACK = function(results){
   return results; 
 };
 
-
 //Set a timer to measure the duration of entire distributed task
 //For testing purposes
 var CLOCK = false;
@@ -88,7 +87,7 @@ dvv.start = function(){
 
   // stores the statistics for a test run
   var testRuns = {};
-  testRuns.testName = ''; //set to random string or benchmark
+  // testRuns.testName = ''; //set to random string or benchmark
   testRuns.functionName = FUNC_NAME;
   testRuns.clientTimes = [];
   testRuns.workerTimes = [];
@@ -156,16 +155,12 @@ dvv.start = function(){
   initializeProcess(partitionedData);
   
   io.of('/').on('connection', function(socket){
-    if (Object.keys(socketStartTimes).length === 0) {
-      var startTime = new Date().getTime();
-      socketStartTimes[socket.id] = startTime;
-    } else {
-      socketStartTimes[socket.id] = new Date().getTime();
-    }
+    
+    socketStartTimes[socket.id] = new Date().getTime();
  
     //This kicks off timer for internal testing purposes
 
-    console.log('New Connection:',socket);
+    // console.log('New Connection:',socket);
     availableClients.push(socket);
 
 
@@ -206,10 +201,6 @@ dvv.start = function(){
       if (completedPackets.size() === partitionedData.length){
         console.log("Computation Complete"); 
         var endTime = new Date().getTime();
-        testRuns['overallTime'] = endTime - startTime;
-        if(clock){
-          console.log('Overall time for completion: ', testRuns.overallTime);
-        }
         var finishedResults = [];
 
         //Integration of all the resulting data using heapsort
@@ -219,10 +210,17 @@ dvv.start = function(){
 
         //Set callback funcrion using dvv.config to perform operations on the finished results
         var results =  callback(finishedResults);
+        var maxTime = 0
         for(sockets in socketStartTimes){
-          testRuns.clientTimes.push(endTime - socketStartTimes[sockets]);
+          var runtime = endTime - socketStartTimes[sockets];
+          if (runtime >= maxTime) { maxTime = runtime; }
+          testRuns.clientTimes.push(runtime);
         }
 
+        testRuns['overallTime'] = maxTime;
+        if(clock){
+          console.log('Overall time for completion: ', testRuns.overallTime);
+        }
         // console.log('testRuns.clientTimes:',testRuns.clientTimes);
         // console.log('testRuns.errors',testRuns.errors);
         // console.log('testRuns.errorTimes',testRuns.errorTimes);
