@@ -8,7 +8,8 @@ var monteCarloPiParallel = function(n) {
   }
 
   obj.func = function RunSimulation () {
-    var n = 1e7;
+    console.log("Running Simulation");
+    var n = 1000;
     var inside = 0;
     while (n--) {
       var x = Math.random();
@@ -25,7 +26,7 @@ var monteCarloPiParallel = function(n) {
   obj.PI = 0;
   obj.callback = function(results){
     inside += result;
-    total += 1e7;
+    total += 1000;
     obj.PI = 4*inside/total;
   };
   return obj;
